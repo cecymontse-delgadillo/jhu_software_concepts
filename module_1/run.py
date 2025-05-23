@@ -1,10 +1,13 @@
 from flask import Flask
 
-app =  Flask(__name__)
+from pages import pages
 
-@app.route("/")
-def home():
-    return "Cecilia Montserrat Delgadillo Olvera - Personal Website"
+#function that initializes the app and returns it
+def create_app():
+    app =  Flask(__name__)
+    app.register_blueprint(pages.bp)
+    return app
 
-if __name__== "__main__":
+if __name__ == "__main__":
+    app = create_app()
     app.run(host="0.0.0.0", port=8000, debug=True)
