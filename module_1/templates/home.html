@@ -5,16 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Montserrat's Personal Website</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
 </head>
 
 <body>
+  {% include("_navigation.html") %}
+
   <header>
     <h1>Welcome to My Personal Website</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-      <a href="#projects">Projects</a>
-    </nav>
   </header>
 
   <main class="container">
