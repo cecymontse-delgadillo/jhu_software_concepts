@@ -5,6 +5,31 @@ I developed a personal website inclusing a biography, contact information, and p
 
 Make sure you have Python 3.10+ and pip installed.
 
+
+# Instructions
+
+1. Clone the repository:
+git clone https://github.com/cecymontse-delgadillo/jhu_software_concepts.git
+cd jhu_software_concepts/module_1/
+
+2. (Optional) Create and activate a virtual environment:
+
 python -m venv venv
 source venv/bin/activate   # or venv\Scripts\activate on Windows
+
+3. Install dependencies using:
+
 pip install -r requirements.txt
+
+4. Run the Flask app - Option 1: 
+
+python run.py # this was enabled to follow the requirements defined in the assignment 
+
+5. Run the Flask app - Option 2: 
+
+flask --app run.py run
+
+6. Open your browser and go to:
+http://127.0.0.1:5000
+
+ß
