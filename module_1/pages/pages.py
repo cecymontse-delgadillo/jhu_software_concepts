@@ -4,8 +4,18 @@ from flask import Blueprint, render_template
 #  the template folder under app folder
 bp = Blueprint("pages", __name__)
 
-# A decorator used to tell the app the URL is 
-# associated to a function
+# A decorator used to tell the app home URL is 
+# associated to this function that returns template home.html
 @bp.route("/")
 def home():
     return render_template("home.html")
+
+# A decorator used to tell the app home URL is 
+# associated to this function
+@bp.route("/contact")
+def contact():
+    return render_template("contact.html")
+
+@bp.route("/projects")
+def projects():
+    return render_template("projects.html")

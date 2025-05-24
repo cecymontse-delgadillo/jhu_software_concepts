@@ -28,6 +28,12 @@
   nav a:hover {
     color: #a8b0cf;
   }
+  nav a.active {
+    font-weight: 700;
+    background-color: #ffffff22;
+    padding-bottom: 0.2rem;
+    border-radius: 4px;
+  }
   
   header {
     background-color: #5561d1;
