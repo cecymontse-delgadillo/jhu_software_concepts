@@ -8,14 +8,14 @@ bp = Blueprint("pages", __name__)
 # associated to this function that returns template home.html
 @bp.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html", current_page="home")
 
 # A decorator used to tell the app home URL is 
 # associated to this function
 @bp.route("/contact")
 def contact():
-    return render_template("contact.html")
+    return render_template("contact.html", current_page="contact")
 
 @bp.route("/projects")
 def projects():
-    return render_template("projects.html")
+    return render_template("projects.html", current_page="projects")

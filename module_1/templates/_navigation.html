@@ -1,6 +1,6 @@
 <nav>
-    <a href="{{url_for('pages.home')}}">About</a>
-    <a href="{{url_for('pages.contact')}}">Contact</a>
-    <a href="{{url_for('pages.projects')}}">Projects</a>
+    <a href="{{url_for('pages.home')}}" class="{% if current_page == 'home' %}active{% endif %}">About</a>
+    <a href="{{url_for('pages.contact')}}" class="{% if current_page == 'contact' %}active{% endif %}" >Contact</a>
+    <a href="{{url_for('pages.projects')}}" class="{% if current_page == 'projects' %}active{% endif %}">Projects</a>
 </nav>
   
