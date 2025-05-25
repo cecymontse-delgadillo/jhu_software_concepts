@@ -1,28 +1,35 @@
+<!--
+  projects.html - Projects Page
+  ------------------------------------
+  This HTML file presents Montserrat Delgadillo's projects from JHU EP 605.256.
+  It includes:
+  - A navigation bar (via Flask template include)
+  - Projects section with static information including project title, description, and GitHub links
+-->
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <title>Projects - Montserrat Delgadillo</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-
-<body>
-  {% include "_navigation.html" %}
-  <header>
-    <h1>Projects</h1>
-  </header>
-  <main class="container">
-    <section id="projects">
-        <article>
-            <h3>Module 1: Personal Website</h3>
-            <p> I developed a personal website inclusing a biography, contact information, and project portfolio. Leveraging Flask,
-                 a lightweight Python web framework, I built the site using static content, incorporating CSS for styling, blueprints for modular routing, and templates for rendering.</p>
-            <p><a href="https://github.com/cecymontse-delgadillo/jhu_software_concepts/tree/main/module_1" target="_blank">View on GitHub</a></p>
-          </article>
-    </section>
-  </main>
-
-</body>
-
+    <head>
+        <meta charset="UTF-8" />
+        <title>Projects - Montserrat Delgadillo</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        {% include "_navigation.html" %}
+        <header>
+            <h1>Projects</h1>
+        </header>
+        <main class="container">
+            <section id="projects">
+                <article>
+                    <h3>Module 1: Personal Website</h3>
+                    <p> I developed a personal website including a biography, contact information, and project portfolio. Leveraging Flask,
+                        a lightweight Python web framework, I built the site using static content, incorporating CSS for styling, blueprints for modular routing, and templates for rendering.
+                    </p>
+                    <p>
+                        <a href="https://github.com/cecymontse-delgadillo/jhu_software_concepts/tree/main/module_1" target="_blank">View on GitHub</a>
+                    </p>
+                </article>
+            </section>
+        </main>
+    </body>
 </html>

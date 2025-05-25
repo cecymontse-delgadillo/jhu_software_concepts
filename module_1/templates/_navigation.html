@@ -1,5 +1,17 @@
+<!--
+  _navigation.html – Navigation Bar Component
+  -------------------------------------------
+  This HTML file defines the reusable navigation bar used across all pages 
+  of Montserrat Delgadillo Olvera's personal website. 
+  Features:
+  - Contains links to core pages: Home, Contact, Projects
+  - Uses Flask's `url_for()` to dynamically generate URLs
+  - Highlights the active tab by applying the "active" CSS class based on the `current_page` context variable
+  Styling Note:
+  - The `.active` class should be defined in style.css to visually highlight the current page link
+-->
 <nav>
-    <a href="{{url_for('pages.home')}}" class="{% if current_page == 'home' %}active{% endif %}">About</a>
+    <a href="{{url_for('pages.home')}}" class="{% if current_page == 'home' %}active{% endif %}">Home</a>
     <a href="{{url_for('pages.contact')}}" class="{% if current_page == 'contact' %}active{% endif %}" >Contact</a>
     <a href="{{url_for('pages.projects')}}" class="{% if current_page == 'projects' %}active{% endif %}">Projects</a>
 </nav>

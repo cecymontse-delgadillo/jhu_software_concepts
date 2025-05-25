@@ -1,41 +1,43 @@
+<!--
+  home.html - Montserrat Delgadillo's personal website home page.
+  ------------------------------------
+  This HTML file defines the entry home page for Montserrat Delgadillo's personal website.
+  It includes:
+  - A navigation bar (via Flask template include)
+  - Static information for Preferred Name, Position, Bio and Picture.
+-->
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <title>Montserrat's Personal Website</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
-</head>
-
-<body>
-  {% include("_navigation.html") %}
-
-  <header>
-    <h1>Welcome to My Personal Website</h1>
-  </header>
-
-  <main class="container">
-    <section id="about">
-      <div id="description">
-        <p id="name"> Montserrat Delgadillo Olvera</p>
-        <p id="position"> Software Development Manager and AI Masters Student</p>
-      </div>
-      <div id="bio">
-        <div id="left_box"> 
-          <h2>About Me</h2>
-          <p>
-            I'm originally from Mexico City, but I currently live in Seattle, WA. I've been working in software engineering for over 13 years.
-            I hold a bachelor's degree on Computer Science from Instituto Tecnológico y de Estudios Superiores de Monterrey (ITESM).
-            My career path has included roles like software consultant, integration engineer, and for the past six years, I've been managing software engineering teams at an e-commerce company. 
-            When I'm not working, I'm spending time with my family – my husband and 19-month-old daughter are my world, and we have four adorable rescue dogs at home. 
-            I'm currently working towards a Master's in AI, which has been a great opportunity to update my skills and knowledge in software development.
-          </p>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Montserrat's Personal Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+  </head>
+  <body>
+    {% include("_navigation.html") %}
+    <header>
+      <h1>Welcome to My Personal Website</h1>
+    </header>
+    <main class="container">
+      <section id="about">
+        <div id="description">
+          <p id="name"> Montserrat Delgadillo Olvera</p>
+          <p id="position"> Software Development Manager and AI Masters Student</p>
         </div>
-        <div id="right_box"> <img id="picture" src="/static/img/montse.jpeg" alt="Montse Delgadillo"> </div>
-      </div>
-    </section>
-  </main>
-
-</body>
-
+        <div id="bio">
+          <div id="left_box"> 
+            <h2>About Me</h2>
+            <p>
+              I'm originally from Mexico City, but I currently live in Seattle, WA. I've been working in software engineering for over 13 years.
+              I hold a bachelor's degree on Computer Science from Instituto Tecnológico y de Estudios Superiores de Monterrey (ITESM).
+              My career path has included roles like software consultant, integration engineer, and for the past six years, I've been managing software engineering teams at an e-commerce company. 
+              When I'm not working, I'm spending time with my family – my husband and 19-month-old daughter are my world, and we have four adorable rescue dogs at home. 
+              I'm currently working towards a Master's in AI, which has been a great opportunity to update my skills and knowledge in software development.
+            </p>
+          </div>
+          <div id="right_box"> <img id="picture" src="/static/img/montse.jpeg" alt="Montse Delgadillo"> </div>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
