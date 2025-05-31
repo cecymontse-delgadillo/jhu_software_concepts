@@ -2,13 +2,15 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 def scrape_data(): 
-    URL = "https://e-catalogue.jhu.edu/course-search"
+    url = "https://www.thegradcafe.com/survey/?q=Masters"
     try:
-        page = urlopen(URL)
+        page = urlopen(url)
         html = page.read().decode("utf-8")
         soup = BeautifulSoup(html, "html.parser")
-        text = soup.get_text()
-        print(text)
+        results = soup.find_all("tbody", class_="tw-divide-y tw-divide-gray-200 tw-bg-white")
+        #text = soup.get_text()
+        #spaceless_text = text.replace("\n\n","")
+        print(results)
     except Exception as e:
         print(f"Error: {e}")
 
