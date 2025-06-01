@@ -1,14 +1,14 @@
-## GradCafe Scraper
+# GradCafe Scraper
 
 A Python project that scrapes graduate school admission results from TheGradCafe and parses the data into structured JSON.
 
-#Features
+## Features
 
  - Scrapes paginated search results from TheGradCafe.
  - Extracts structured applicant data (e.g. university, program, GRE scores, GPA, etc.).
  - Saves raw HTML and cleaned JSON data.
 
-# Project Structure
+## Project Structure
 
 .
 ├── lib
@@ -24,42 +24,60 @@ A Python project that scrapes graduate school admission results from TheGradCafe
 ├── requirements.txt           # Python dependencies
 └── README.md                  # Project documentation
 
-Requirements
+## Requirements
 
-Python 3.7+
+ * Python 3.10+
+ * Beautifulsoup4 4.13.4+
+ * urllib3
 
-Install dependencies:
+## Instructions
 
+1. Clone the repository:
+```bash
+git clone https://github.com/cecymontse-delgadillo/jhu_software_concepts.git
+cd jhu_software_concepts/module_2/
+```
+
+2. (Optional) Create and activate a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate   # or venv\Scripts\activate on Windows
+```
+
+3. Install dependencies:
+
+```bash
 pip install -r requirements.txt
+```
 
-Usage
+## Usage
 
-Scraping Raw HTML
+### Scraping Raw HTML
 
-python grandcafe_scraper.py
+```bash
+python scrape.py
+```
 
 This saves raw HTML data into grandcafe_scrape_raw_data.html.
 
-Cleaning Data
+### Cleaning Data
 
-python grandcafe_cleaner.py
-
+```bash
+python clean.py
+```
 This processes the HTML and saves cleaned applicant data to applicant_data.json.
 
-Customizing the Scraper
+### Customizing the Scraper
 
-You can change the search filters by modifying the base URL in grandcafe_scraper.py:
+You can change the search filters by modifying the base URL in scrape.py:
 
 base_url = "https://www.thegradcafe.com/survey/?q=&sort=newest&institution=&program=&degree=&season=&decision=&decision_start=YYYY-MM-DD"
 
-Notes
+## Notes
 
-Be respectful to TheGradCafe's servers: do not hammer requests, and use delays.
+* Be respectful to TheGradCafe's servers: do not hammer requests, and use delays.
 
-This scraper is intended for educational and personal use.
-
-License
-
-MIT License
+# Contact
+cdelga15@jhu.edu
 
 
