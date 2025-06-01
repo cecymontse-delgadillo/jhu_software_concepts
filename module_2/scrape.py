@@ -20,4 +20,4 @@ class GrandCafeApplicantScraper(Scraper):
 if __name__ == "__main__":
     scraper = GrandCafeApplicantScraper("https://www.thegradcafe.com/survey/?q=Masters")
     data = scraper.scrape_data()
-    scraper.save_raw_data("/Users/montsedelgadilloolvera/Documents/Masters/Summer 2025/ModernSoftwareConceptsPython/Assignments/jhu_software_concepts/","grandcafe_scrape_raw_data.html", str(data))
+    scraper.save_raw_data("grandcafe_scrape_raw_data.html", str(data))

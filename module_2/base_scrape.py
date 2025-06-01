@@ -12,8 +12,9 @@ class Scraper:
         raise NotImplementedError("Subclases must implement this function")
 
 
-    def save_raw_data(self, directory, filename, content):
+    def save_raw_data(self, filename, content):
         try:
+            directory= os.getcwd()
             # Create the directory if it doesn't exist
             if not os.path.exists(directory):
                 os.makedirs(directory)

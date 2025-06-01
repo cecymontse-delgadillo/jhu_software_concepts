@@ -8,13 +8,14 @@ class ScrapeCleaner:
     def load_data(self):
         try:
             # Attempt to open and read the file
+            
             with open(self.raw_data_filepath, "r") as file:
                 content = file.read()
             return content
-        except FileNotFoundError:
-            print(f"Error: The file '{self.raw_data_filepath}' does not exist.")
-        except PermissionError:
-            print(f"Error: You do not have permission to read the file '{self.raw_data_filepath}'.")
+        except FileNotFoundError as e:
+            print(f"Error: The file '{self.raw_data_filepath}' does not exist. {e}")
+        except PermissionError as e:
+            print(f"Error: You do not have permission to read the file '{self.raw_data_filepath}'. {e}")
         except Exception as e:
             # Catch other unforeseen errors
             print(f"An unexpected error occurred: {e}")
@@ -26,4 +27,4 @@ class ScrapeCleaner:
     def save_data(self, data, filename):
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
-        print(f"Data saved to {filename}")
+        print(f"Data saved to {filename}. {f.name}")

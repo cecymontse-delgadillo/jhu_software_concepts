@@ -51,18 +51,19 @@ class GrandCafeApplicantScraperCleaner(ScrapeCleaner):
                 text_lines = re.findall(r'[^\n\r]+', basic_data[1].get_text())
                 program = text_lines[0] if len(text_lines) > 0 else ''
                 degree = text_lines[1] if len(text_lines) > 1 else ''
+                 # Find applicant URL with suffix and strip the fragment
+                url = f"https://www.thegradcafe.com{applicant_soup.find('a', href=lambda href: href and href.startswith("/result/"))['href']}"
 
                 #Create an Applicant instance
                 applicant = Applicant(
                     program=program,
                     university=basic_data[0].get_text(strip=True),
                     date_added=basic_data[2].get_text(strip=True),
-                    # TODO - Placeholder for source URL
-                    url='https://...',  
+                    url=url,  
                     status=basic_data[3].get_text(strip=True),
                     degree=degree,
-                    # TODO - Clean-up comments
-                    comments=comments.get_text(strip=True) if comments else ''
+                    comments=comments.get_text(strip=True).replace("\n", " ").replace("\t", "") if comments else ''
+                    #comments = re.sub()
                 )
                 # Extract metadata from tags
                 for tag in tags:
@@ -88,7 +89,7 @@ class GrandCafeApplicantScraperCleaner(ScrapeCleaner):
 
 
 if __name__ == "__main__":
-    cleaner = GrandCafeApplicantScraperCleaner("/Users/montsedelgadilloolvera/Documents/Masters/Summer 2025/ModernSoftwareConceptsPython/Assignments/jhu_software_concepts/grandcafe_scrape_raw_data.html")
+    cleaner = GrandCafeApplicantScraperCleaner("grandcafe_scrape_raw_data.html")
     raw_data = cleaner.load_data()
     cleaned_results = cleaner.clean_data(raw_data)
     cleaner.save_data(cleaned_results,"applicant_data.json")
