@@ -51,7 +51,7 @@ class GrandCafeApplicantScraperCleaner(ScrapeCleaner):
                 text_lines = re.findall(r'[^\n\r]+', basic_data[1].get_text())
                 program = text_lines[0] if len(text_lines) > 0 else ''
                 degree = text_lines[1] if len(text_lines) > 1 else ''
-                 # Find applicant URL with suffix and strip the fragment
+                 # Find applicant URL
                 url = f"https://www.thegradcafe.com{applicant_soup.find('a', href=lambda href: href and href.startswith("/result/"))['href']}"
 
                 #Create an Applicant instance
@@ -82,6 +82,7 @@ class GrandCafeApplicantScraperCleaner(ScrapeCleaner):
                         applicant.term = text
 
                 results.append(applicant.to_json())
+            print(f"{len(results)} Applicant information saved")
             return results
         except Exception as e:
             print(f"Error cleaning scraped information: {e}")
