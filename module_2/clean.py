@@ -1,18 +1,32 @@
-from base_clean import ScrapeCleaner
-from Applicant import Applicant
-from bs4 import BeautifulSoup
-import re
+"""
+clean.py - Grand Cafe Specialized cleaner module 
+-------------------------------------------------
+This module defines a specialized cleaner class for processing raw HTML scraped from The GradCafe admissions results pages.
 
+Features:
+- Inherits from a generic cleaner base class.
+- Uses BeautifulSoup to parse and extract specific format of Grand Cafe
+- Creates applicants and outputs it in JSON format.
+- Main execution: load, clean and save scraped data
+
+Usage:
+   $ python clean.py
+"""
+from lib.base_clean import ScrapeCleaner
+from models.Applicant import Applicant
+from bs4 import BeautifulSoup
+import re, os
 
 class GrandCafeApplicantScraperCleaner(ScrapeCleaner):
-        
+    # Method to clean raw HTML data and extract applicant information   
     def clean_data(self, data):
         try: 
             soup = BeautifulSoup(data, 'html.parser')
             rows =  soup.find_all('tr')
             applicants =[]
-            temp_group_tr = []
+            temp_group_tr = [] # Temporary group to hold multiple rows per applicant
 
+            # Group each applicant's rows based on row class structure
             for i, row in enumerate(rows):
                 row_class = row.get('class')
                 
@@ -63,7 +77,6 @@ class GrandCafeApplicantScraperCleaner(ScrapeCleaner):
                     status=basic_data[3].get_text(strip=True),
                     degree=degree,
                     comments=comments.get_text(strip=True).replace("\n", " ").replace("\t", "") if comments else ''
-                    #comments = re.sub()
                 )
                 # Extract metadata from tags
                 for tag in tags:
@@ -88,9 +101,10 @@ class GrandCafeApplicantScraperCleaner(ScrapeCleaner):
             print(f"Error cleaning scraped information: {e}")
             return []
 
-
+# Main execution: load, clean and save scraped data
 if __name__ == "__main__":
-    cleaner = GrandCafeApplicantScraperCleaner("grandcafe_scrape_raw_data.html")
+    path =f"{os.getcwd()}/data/grandcafe_scrape_raw_data.html"
+    cleaner = GrandCafeApplicantScraperCleaner(path)
     raw_data = cleaner.load_data()
     cleaned_results = cleaner.clean_data(raw_data)
     cleaner.save_data(cleaned_results,"applicant_data.json")
