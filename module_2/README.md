@@ -8,6 +8,13 @@ A Python project that scrapes graduate school admission results from TheGradCafe
  - Extracts structured applicant data (e.g. university, program, GRE scores, GPA, etc.).
  - Saves raw HTML and cleaned JSON data.
 
+ ## Robots.txt Validation
+I validated https://www.thegradcafe.com/robots.txt
+Summary:
+ - Most general-purpose bots can scrap the site except for a couple of specific pages/directories like /cgi-bin/ directory.
+ - Several specific bots are fully blocked.
+ - Conclusion: Since we aare not using the restricted directories, we can scrape respecfully the site 
+
 ## Project Structure
 ```
 .
