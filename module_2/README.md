@@ -9,7 +9,7 @@ A Python project that scrapes graduate school admission results from TheGradCafe
  - Saves raw HTML and cleaned JSON data.
 
 ## Project Structure
-
+```
 .
 ├── lib
 │   ├── base_scrape.py         # Generic base scraper class using urllib3
@@ -23,6 +23,7 @@ A Python project that scrapes graduate school admission results from TheGradCafe
 ├── applicant_data.jason       # JSON format Applicant data with +10K resultsgit
 ├── requirements.txt           # Python dependencies
 └── README.md                  # Project documentation
+```
 
 ## Requirements
 
