@@ -86,6 +86,7 @@ base_url = "https://www.thegradcafe.com/survey/?q=&sort=newest&institution=&prog
 * Be respectful to TheGradCafe's servers: do not hammer requests, and use delays.
 
 # Contact
+Name: Cecilia Montserrat Delgadillo Olvera AKA Montse
 cdelga15@jhu.edu
 
 

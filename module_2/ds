@@ -1,0 +1,95 @@
+**Project Overview - Web Scraping and Data Cleaning Pipeline**
+
+This project is designed to scrape admission decision data from TheGradCafe website, process and clean the scraped HTML data, and convert it into structured JSON format. The system follows a modular and extensible object-oriented architecture.
+
+---
+
+**1. Architecture Overview**
+
+The architecture is divided into three primary modules:
+
+* **Scraper Module** (BaseScraper and GrandCafeApplicantScraper)
+* **Cleaner Module** (BaseCleaner and GrandCafeApplicantScraperCleaner)
+* **Model Module** (Applicant)
+
+Each module is designed with inheritance and separation of concerns, enabling flexibility, reuse, and easy customization.
+
+---
+
+**2. Algorithms & Implementation Details**
+
+**A. Scraping Logic (Pagination Support)**
+
+* **BaseScraper class**: Provides a reusable foundation for web scraping tasks using either `requests` or `urllib3`. It supports pagination and HTTP connection pooling.
+* **GrandCafeApplicantScraper class**: Implements the logic to traverse multiple pages (up to 500 by default), extract HTML table rows (`<tr>`), and aggregate them.
+* It also handles delays between requests to avoid overloading the server.
+
+**B. HTML Cleaning & Data Extraction**
+
+* **BaseCleaner class**: Defines a contract for loading, cleaning, and saving data.
+* **GrandCafeApplicantScraperCleaner class**:
+
+  * Parses groups of `<tr>` tags based on the presence of CSS classes.
+  * Uses BeautifulSoup for DOM navigation and `re` (regex) for pattern matching in free-form text.
+  * Extracts program details, degree, status, comments, and metadata like GRE scores and nationality.
+  * Locates the URL pointing to the decision thread.
+
+**C. Data Modeling and Transformation**
+
+* **Applicant class**:
+
+  * Represents a single application record.
+  * Includes a `to_json()` method that serializes non-empty fields.
+  * Allows clean JSON output for further analysis or storage.
+
+---
+
+**3. Design Patterns & Principles**
+
+* **Inheritance & Abstraction**:
+
+  * `Scraper` and `Cleaner` base classes define interfaces, encouraging DRY and reusable design.
+* **Encapsulation**:
+
+  * Each class is responsible for one logical piece of functionality.
+* **Separation of Concerns**:
+
+  * Scraping and cleaning responsibilities are separated for maintainability and clarity.
+
+---
+
+**4. Extensibility**
+
+* To scrape a different website, implement a subclass of `Scraper`.
+* To clean a different format of data, implement a subclass of `ScrapeCleaner`.
+
+---
+
+**5. Output**
+
+* Final structured data is saved to a JSON file using UTF-8 encoding.
+* A raw HTML dump is also optionally saved to disk for backup or debugging.
+
+---
+
+**6. Usage**
+
+* The project is run via a main script that:
+
+  * Scrapes the data.
+  * Loads and cleans it.
+  * Saves the output to `applicant_data.json`.
+
+---
+
+**7. Tools & Libraries Used**
+
+* `urllib3` / `requests`: For HTTP operations
+* `BeautifulSoup4`: For HTML parsing
+* `re`: For regular expression extraction
+* `json`: For data serialization
+* `time`, `os`: Standard utility modules
+
+---
+
+This modular, robust pipeline allows for efficient scraping, parsing, and transformation of data into a usable format.
