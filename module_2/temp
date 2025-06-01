@@ -1,0 +1,67 @@
+from base_clean import ScrapeCleaner
+from bs4 import BeautifulSoup
+import re
+
+
+class GrandCafeScraperCleaner(ScrapeCleaner):
+        
+    def clean_data(self, data):
+        try: 
+            soup = BeautifulSoup(data, 'html.parser')
+            rows =  soup.find_all('tr')
+            applicants =[]
+            temp_group_tr = []
+
+            for i, row in enumerate(rows):
+                row_class = row.get('class')
+                
+                #Start of a new applicant - <tr> without class
+                if not row_class:
+                    
+            
+            results = []
+            for row in rows:
+               # print(row)
+                cols = row.find_all('td')
+                if len(cols) >=4:
+                   # print(cols)
+                    program = re.findall(r'[^\n\r]+', cols[1].get_text())[0]
+                    university= cols[0].get_text(strip=True)
+                    comments= ""
+                    date_added = cols[2].get_text(strip=True)
+                    url= "https://..."
+                    applicant_status= cols[3].get_text(strip=True)
+                    term = "Test_2025"
+                    us_or_international = "International"
+                    gre = "3.0"
+                    gre_v= "f"
+                    degree = re.findall(r'[^\n\r]+', cols[1].get_text())[1]
+                    gpa = ""
+                    gre_aw=""
+                    
+                    result = {
+                        'program': f"{program}, {university}",
+                        'comments': comments,
+                        'date_added': date_added,
+                        'url': url,
+                        'status': applicant_status,
+                        'term': term,
+                        'US/International': us_or_international,
+                        'GRE': gre,
+                        'GRE_V': gre_v,
+                        'Degree': degree,
+                        'GPA': gpa,
+                        'GRE_AW': gre_aw,
+                    }
+                    results.append(result)
+            return results
+        except Exception as e:
+            print(f"Error cleaning scraped information: {e}")
+            return []
+
+
+if __name__ == "__main__":
+    cleaner = GrandCafeScraperCleaner("/Users/montsedelgadilloolvera/Documents/Masters/Summer 2025/ModernSoftwareConceptsPython/Assignments/jhu_software_concepts/grandcafe_scrape_raw_data.html")
+    raw_data = cleaner.load_data()
+    cleaned_results = cleaner.clean_data(raw_data)
+    cleaner.save_data(cleaned_results,"applicant_data.json")
