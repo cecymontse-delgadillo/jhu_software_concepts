@@ -47,7 +47,7 @@ if __name__ == "__main__":
 
     # Parameters for filtering the scraping
     params = {
-        "query": "q", # Specific search
+        "query": "", # Specific search
         "sort": "newest", 
         "institution": "", # i.e. Columbia University
         "program": "", # i.e. Economics

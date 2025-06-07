@@ -1,4 +1,3 @@
-from psycopg import connect, Connection
 from psycopg_pool import ConnectionPool
 from contextlib import contextmanager
 
