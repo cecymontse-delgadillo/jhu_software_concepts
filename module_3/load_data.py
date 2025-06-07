@@ -2,10 +2,6 @@ from lib.database_utils import DatabaseUtils
 import json
 import os
 
-
-db = DatabaseUtils("grandcafedatabase", "montsedelgadilloolvera", "")
-
-
 def create_applicants_table():
     db.drop_table("Applicants")
     db.create_table("""
@@ -47,6 +43,9 @@ def insert_applicants(data):
        """, applicant)
 
 if __name__ == "__main__":
+    conninfo = "postgresql:///grandcafedatabase"
+    db = DatabaseUtils(conninfo, 5, 10)
     path = f"{os.getcwd()}/module_2/applicant_data.json"
     data = load_data(path)
+    create_applicants_table()
     insert_applicants(data)
