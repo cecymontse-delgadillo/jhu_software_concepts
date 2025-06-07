@@ -22,7 +22,6 @@ class GrandCafeApplicantScraper(Scraper):
     # Scrapes data from multiple paginated survey result pages
     def scrape_data(self): 
         try:
-            page_count = 1
             results=[]
 
             while True:

@@ -39,13 +39,16 @@ class DatabaseUtils:
     def execute_query(self, query, params):
         try: 
             if params and isinstance(params, dict):
-                params = {k: (v if v is not None else "") for k, v in params.items()}
+                params = {k:v for k, v in params.items()}
             with self.get_db_connection() as conn:
                 with conn.cursor() as cur:
                         cur.execute(query, params)
                         conn.commit()
+                        print(f"Query executed {query}")
         except Exception as e:
             print(f"Error executing query: {e}")
+    
+
     
     #function to select queries
     def get_query(self, query, params):

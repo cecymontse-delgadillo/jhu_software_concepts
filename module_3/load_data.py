@@ -1,6 +1,6 @@
 from lib.database_utils import DatabaseUtils
 import json
-import os
+import os, re
 
 def create_applicants_table(db):
     db.drop_table("Applicants")
@@ -36,12 +36,29 @@ def load_data(filename):
     return data
 
 #Inserts a list of applicants to the database PostgreSQL
-def insert_applicants(data):
-    for applicant in data:
-        cleaned_applicant = {k: (v if v is not None else "") for k, v in dict(applicant).items()}
+def insert_applicants(applicants):
+    float_fields = {"gpa", "gre", "gre_v", "gre_aw"}
+    for applicant in applicants:
+        cleaned_applicant = {}
+        for k, v in dict(applicant).items():
+            # Rename 'nationality' to 'us_or_international'
+            key = "us_or_international" if k == "nationality" else k
+
+            # Attempt to convert float fields
+            if key in float_fields:
+                try:
+                    match = re.search(r"\d+(\.\d+)?", v)
+                    v = match.group(0) if match else None
+                    cleaned_applicant[key] = float(v)
+                except (ValueError, TypeError):
+                    cleaned_applicant[key] = None  # or 0.0, depending on your needs
+            else:
+                # Convert None to empty string for other fields
+                cleaned_applicant[key] = v if v is not None else ""
+
         columns = cleaned_applicant.keys()
         values = tuple(cleaned_applicant.values())
-        query = "INSERT INTO {} ({}) VALUES ({});".format("Applicants", ", ".join(columns), ", ".join(["%s"] * len(values)))
+        query = "INSERT INTO Applicants ({}) VALUES ({});".format(", ".join(columns), ", ".join(["%s"] * len(values)))
         db.execute_query(query, values)
 
 if __name__ == "__main__":
@@ -49,5 +66,5 @@ if __name__ == "__main__":
     db = DatabaseUtils(conninfo, 5, 10)
     path = f"{os.getcwd()}/module_2/applicant_data.json"
     data = load_data(path)
-    create_applicants_table()
+    create_applicants_table(db)
     insert_applicants(data)
