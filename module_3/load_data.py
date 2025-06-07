@@ -1,17 +1,10 @@
-import psycopg
+from lib.database_utils import DatabaseUtils
 
-class DatabaseUtils: 
-    def __init__(self, dbname, user, password):
-        self.dbname = dbname
-        self.user = user
-        self.password = password
+db = DatabaseUtils("grandcafedatabase", "montsedelgadilloolvera", "")
 
-    def get_db_connection(self):
-        connection = psycopg.connect(
-            dbname=self.dbname,
-            user=self.user,
-            password= self.password
-        )
-        return connection
-    
+
+def create_applicants_table():
+    db.create_table()
+
+def load_grandcafe_data():
 
