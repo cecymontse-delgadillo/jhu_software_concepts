@@ -2,7 +2,7 @@ from lib.database_utils import DatabaseUtils
 import json
 import os
 
-def create_applicants_table(db):
+def create_applicants_table():
     db.drop_table("Applicants")
     db.create_table("""
         CREATE TABLE Applicants(
@@ -21,7 +21,6 @@ def create_applicants_table(db):
             degree TEXT);
    """)
 
-# Loas JSON data from specific file path and return the list or empty
 def load_data(filename):
     try:
         with open(filename, 'r', encoding='utf-8') as f:
@@ -35,14 +34,14 @@ def load_data(filename):
         print(f"Unexpected error reading JSON file: {e}")
     return data
 
-#Inserts a list of applicants to the database PostgreSQL
 def insert_applicants(data):
     for applicant in data:
-        cleaned_applicant = {k: (v if v is not None else "") for k, v in dict(applicant).items()}
-        columns = cleaned_applicant.keys()
-        values = tuple(cleaned_applicant.values())
-        query = "INSERT INTO {} ({}) VALUES ({});".format("Applicants", ", ".join(columns), ", ".join(["%s"] * len(values)))
-        db.execute_query(query, values)
+        db.execute_query("""
+            INSERT INTO Applicants(program, comments, date_added,url,
+                status,term,us_or_international,gpa,gre,gre_v,gre_aw, degree)
+                VALUES ( %(program)s, %(comments)s, %(date_added)s, %(url)s, %(status)s, %(term)s, %(nationality)s, %(gpa)s, %(gre)s, %(gre_v)s, %(gre_aw)s, %(degree)s
+        )
+       """, applicant)
 
 if __name__ == "__main__":
     conninfo = "postgresql:///grandcafedatabase"

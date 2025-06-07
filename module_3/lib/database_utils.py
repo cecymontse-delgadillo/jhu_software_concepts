@@ -17,41 +17,43 @@ class DatabaseUtils:
     
     def create_table(self, create_table_sql):
         try: 
-            conn = self.get_db_connection()
-            with conn.cursor() as cur:
-                cur.execute(create_table_sql)
-                conn.commit()
-                print("Table created succesfully")
+            with self.get_db_connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(create_table_sql)
+                    conn.commit()
+                    print("Table created succesfully")
         except Exception as e:
             print(f"Error executing query: {e}")
     #Drop table
     def drop_table(self, table_name):
         try: 
-            conn = self.get_db_connection()
-            with conn.cursor() as cur:
-                cur.execute(f'DROP TABLE IF exists {table_name};')
-                conn.commit()
-                print("Table dropped succesfully")
+            with self.get_db_connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(f'DROP TABLE IF exists {table_name};')
+                    conn.commit()
+                    print("Table dropped succesfully")
         except Exception as e:
             print(f"Error executing query: {e}")
 
     #function to update, insert, or delete queries
     def execute_query(self, query, params):
         try: 
-            conn = self.get_db_connection()
-            with conn.cursor() as cur:
-                    cur.execute(query, params)
-                    conn.commit()
+            if params and isinstance(params, dict):
+                params = {k: (v if v is not None else "") for k, v in params.items()}
+            with self.get_db_connection() as conn:
+                with conn.cursor() as cur:
+                        cur.execute(query, params)
+                        conn.commit()
         except Exception as e:
             print(f"Error executing query: {e}")
     
     #function to select queries
-    def execute_query(self, query, params):
+    def get_query(self, query, params):
         try: 
-            conn = self.get_db_connection()
-            with conn.cursor() as cur:
-                    cur.execute(query, params)
-                    return cur.fetchall()
+            with self.get_db_connection() as conn:
+                with conn.cursor() as cur:
+                        cur.execute(query, params)
+                        return cur.fetchall()
         except Exception as e:
             print(f"Error executing query: {e}")
 
