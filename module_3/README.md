@@ -62,11 +62,6 @@ Ensure PostgreSQL is installed and a database named grandcafedatabase exists:
 ### 3. Install Python dependencies
 
 This project uses the standard library only, but ensure your environment includes:
-
-    Python 3.8+
-
-    psycopg2 (for database connection if not using custom utils)
-
 ```bash
     pip install -r requirements.txt
 ```
@@ -80,7 +75,9 @@ python load_data.py
 This will:
 
    - Drop and recreate the Applicants table
+
    - Load and clean JSON data
+   
    - Insert applicants into the database
 
 ### Run analysis as Flask App
@@ -106,7 +103,9 @@ python query_data.py
 ```
 
 This will:
+
     - Execute predefined queries
+
     - Write formatted answers to query_data.txt
 
 
