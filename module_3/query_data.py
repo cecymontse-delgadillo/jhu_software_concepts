@@ -1,11 +1,34 @@
+"""
+query_data.py - Module
+-------------------------------------------------
+This module defines the `GrandCafeAnalysis` class responsible for executing 
+a set of predefined analytical queries against the `Applicants` table in the `grandcafedatabase` PostgreSQL database.
+
+Features:
+- Creates multiple `Question` objects, each containing a specific analytical query.
+- Executes each query using the `DatabaseUtils` class.
+- Updates each question object with its formatted result.
+- Outputs all answers into a documentation file using the `Questionaries` class.
+
+Dependencies: 
+- lib.database_utils: Contains database connection and query execution utilities.
+- models.Question: Defines the Question class structure and the Questionaries container.
+
+Usage:
+    $ python query_data.py      # saves the questionary in query_data.txt
+    OR
+    Create an instance of GrandCafeAnalysis to execute_analysis()
+"""
 from lib.database_utils import DatabaseUtils
 from models.Question import Question, Questionaries
 
 class GrandCafeAnalysis: 
     def execute_analysis(self):
+        # Initialize database connection
         conninfo = "postgresql:///grandcafedatabase"
         db = DatabaseUtils(conninfo, 5, 10)
         questionary = []
+        # ----------------------------- Question 1 -----------------------------
         question_1 = Question(
             question= "How many entries do you have in your database who have applied for Spring 2025?",
             query = "SELECT COUNT(*) FROM Applicants WHERE term = 'Spring 2025';",
@@ -13,6 +36,7 @@ class GrandCafeAnalysis:
             "In this case the term we are looking is 'Spring 2025'",
             answer=" Applicant count: {}"
         )
+        # ----------------------------- Question 2 -----------------------------
         question_2 =Question(
             question= "What percentage of entries are from international students (not American or Other) (to two decimal places)? ",
             query = "SELECT CAST((ROUND ((COUNT(*)*100.0)/ (SELECT COUNT(*) FROM Applicants),2)) AS FLOAT) AS Percentage FROM Applicants WHERE US_OR_INTERNATIONAL <> 'American';",
@@ -21,6 +45,7 @@ class GrandCafeAnalysis:
             "The result is rounded to 2 decimal places and labeled as 'Percentage'. To ensure accurate decimal representation, we cast the result to a float, avoiding any potential Decimal object notation in the output.",
             answer=" Percent International: {}"
         )
+        # ----------------------------- Question 3 -----------------------------
         question_3 =Question(
             question= "What is the average GPA, GRE, GRE V, GRE AW of applicants who provide these metrics?",
             query = "SELECT CAST(ROUND(AVG(gpa)::NUMERIC, 2) AS FLOAT) as GPA_avg, CAST(ROUND(AVG(gre)::NUMERIC, 2) AS FLOAT) as GRE_avg, CAST(ROUND(AVG(gre_v)::NUMERIC,2) AS FLOAT) as GRE_V_avg, CAST(ROUND(AVG(gre_aw)::NUMERIC,2) AS FLOAT) as GRE_AW_avg FROM Applicants;",
@@ -30,6 +55,7 @@ class GrandCafeAnalysis:
             answer=" Averate GPA: {}, Average GRE: {}, Average GRE V: {}, Average GRE AW: {}"
 
         )
+        # ----------------------------- Question 4 -----------------------------
         question_4 =Question(
             question= "What is their average GPA of American students in Spring 2025?",
             query = "SELECT CAST(ROUND(AVG(gpa)::NUMERIC,2) AS FLOAT) as GPA_avg FROM Applicants WHERE term = 'Spring 2025' AND US_OR_INTERNATIONAL = 'American'; ",
@@ -38,6 +64,7 @@ class GrandCafeAnalysis:
             "To ensure accurate calculations, the AVG result is cast to NUMERIC, and the result is cast to a float to guarantee precise decimal representation.",
             answer=" Averate GPA American: {}"
         )
+        # ----------------------------- Question 5 -----------------------------
         question_5 =Question(
             question= "What percent of entries for Spring 2025 are Acceptances (to two decimal places)?",
             query = "SELECT CAST((ROUND ((COUNT(*)*100.0)/ (SELECT COUNT(*) FROM Applicants WHERE term = 'Spring 2025'),2)) AS FLOAT) AS Percentage FROM Applicants WHERE status ~* 'Accepted' AND term = 'Spring 2025';",
@@ -47,6 +74,7 @@ class GrandCafeAnalysis:
             " Finally, the result is cast to a float to ensure precise decimal representation.",
             answer=" Acceptance percent: {}"
         )
+        # ----------------------------- Question 6 -----------------------------
         question_6 =Question(
             question= "What is the average GPA of applicants who applied for Spring 2025 who are Acceptances?",
             query = "SELECT CAST(ROUND(AVG(gpa)::NUMERIC,2) AS FLOAT) AS Average FROM Applicants WHERE status ~* 'Accepted' AND term = 'Spring 2025';",
@@ -54,6 +82,7 @@ class GrandCafeAnalysis:
             "The status matches 'Accepted' using a case-insensitive regular expression (~*), and term is 'Spring 2025'. It uses ROUND to display only two decimal places. ",
             answer=" Average GPA Acceptance: {}"
         )
+        # ----------------------------- Question 7 -----------------------------
         question_7 =Question(
             question= "How many entries are from applicants who applied to JHU for a masters degrees in Computer Science?",
             query = "SELECT COUNT(*) FROM Applicants WHERE program ~* 'JHU' OR program ~* 'Johns Hopkins' AND degree ='Masters' AND program ~* 'Computer Science';",
@@ -70,12 +99,13 @@ class GrandCafeAnalysis:
         questionary.append(question_5)
         questionary.append(question_6)
         questionary.append(question_7)
+        # Execute each query and populate answers
         for question in questionary:
             answer = db.get_query(question.get_query())
             question.update_answer(answer)
         return questionary
     
-
+# Entry point: Run the analysis and write output to a file
 if __name__ == "__main__":
     gc_analysis = GrandCafeAnalysis()
     Questionaries(gc_analysis.execute_analysis()).to_doc("query_data.txt")

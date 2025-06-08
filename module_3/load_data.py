@@ -1,7 +1,27 @@
+"""
+load_data.py - Module to load data from JSON file to DB
+-------------------------------------------------
+This module handles the process of creating a PostgreSQL table,
+loading applicant data from a JSON file, cleaning and normalizing
+the data, and inserting it into the database using a connection pool.
+Features:
+- lib.database_utils: Custom database utility class (with connection pooling using psycopg)
+- json: For reading and parsing JSON data
+- os: To construct file paths
+- re: For regex-based string cleaning
+
+Dependencies: 
+- lib.database_utils: Contains database connection and query execution utilities.
+
+Usage:
+    $ python load_data.py      # saves the data from /module_2/applicant_data.json file to PostgreSQL
+"""
+
 from lib.database_utils import DatabaseUtils
 import json
 import os, re
 
+# Drops the 'Applicants' table if it exists and creates a new one.
 def create_applicants_table(db):
     db.drop_table("Applicants")
     db.create_table("""
@@ -62,9 +82,13 @@ def insert_applicants(applicants):
         db.execute_query(query, values)
 
 if __name__ == "__main__":
+    # Database connection info (local PostgreSQL)
     conninfo = "postgresql:///grandcafedatabase"
+    # Initialize the database utility with a connection pool
     db = DatabaseUtils(conninfo, 5, 10)
+    # Load applicant data from a JSON file
     path = f"{os.getcwd()}/module_2/applicant_data.json"
     data = load_data(path)
+    # Recreate the applicants table and insert data
     create_applicants_table(db)
     insert_applicants(data)

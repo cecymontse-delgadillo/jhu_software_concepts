@@ -1,3 +1,17 @@
+"""
+app.py - Application Factory for Grand Cafe Analysis
+-------------------------------------------------
+This script initializes and runs a Flask web application.
+Features:
+- Uses the Flask application factory pattern via create_app()
+- Registers a blueprint named 'pages' which contains route definitions
+- Can be run directly with `python app.py` for local development
+
+Usage:
+    $ flask run          # via Flask CLI
+    OR
+    $ python app.py      # runs on http://127.0.0.1:5000 by default
+"""
 from flask import Flask
 from pages import pages
 
