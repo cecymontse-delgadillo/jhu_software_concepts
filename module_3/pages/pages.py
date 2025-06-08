@@ -9,7 +9,7 @@ Features:
 - This module is registered in the main Flask app via `app.register_blueprint(pages.bp)` in app.py.
 """
 from flask import Blueprint, render_template
-from query_data import GrandCafeAnalysis
+from query_data import GradCafeAnalysis
 
 # Create a blueprint instance named 'bp'
 # Uses the 'template' folder to load HTML
@@ -18,6 +18,6 @@ bp = Blueprint("pages", __name__)
 # A decorator that defines a route to index page
 @bp.route("/")
 def index():
-    questions = GrandCafeAnalysis().execute_analysis()
+    questions = GradCafeAnalysis().execute_analysis()
     return render_template("questions.html", questions=questions)
 

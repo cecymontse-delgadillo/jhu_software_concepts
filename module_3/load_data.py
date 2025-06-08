@@ -83,11 +83,11 @@ def insert_applicants(applicants):
 
 if __name__ == "__main__":
     # Database connection info (local PostgreSQL)
-    conninfo = "postgresql:///grandcafedatabase"
+    conninfo = "postgresql:///gradcafedatabase"
     # Initialize the database utility with a connection pool
     db = DatabaseUtils(conninfo, 5, 10)
     # Load applicant data from a JSON file
-    path = f"{os.getcwd()}/module_2/applicant_data.json"
+    path = f"{os.getcwd()}/applicant_data.json"
     data = load_data(path)
     # Recreate the applicants table and insert data
     create_applicants_table(db)

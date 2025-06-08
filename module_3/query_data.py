@@ -22,10 +22,10 @@ Usage:
 from lib.database_utils import DatabaseUtils
 from models.Question import Question, Questionaries
 
-class GrandCafeAnalysis: 
+class GradCafeAnalysis: 
     def execute_analysis(self):
         # Initialize database connection
-        conninfo = "postgresql:///grandcafedatabase"
+        conninfo = "postgresql:///gradcafedatabase"
         db = DatabaseUtils(conninfo, 5, 10)
         questionary = []
         # ----------------------------- Question 1 -----------------------------
@@ -107,7 +107,7 @@ class GrandCafeAnalysis:
     
 # Entry point: Run the analysis and write output to a file
 if __name__ == "__main__":
-    gc_analysis = GrandCafeAnalysis()
+    gc_analysis = GradCafeAnalysis()
     Questionaries(gc_analysis.execute_analysis()).to_doc("query_data.txt")
 
 
