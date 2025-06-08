@@ -60,3 +60,13 @@ class DatabaseUtils:
         except Exception as e:
             print(f"Error executing query: {e}")
 
+    #Overload: Function fo select queries without params
+    def get_query(self, query):
+        try: 
+            with self.get_db_connection() as conn:
+                with conn.cursor() as cur:
+                        cur.execute(query)
+                        return cur.fetchall()
+        except Exception as e:
+            print(f"Error executing query: {e}")
+

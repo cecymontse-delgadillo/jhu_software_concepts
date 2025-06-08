@@ -1,6 +1,73 @@
 from lib.database_utils import DatabaseUtils
+from models.Question import Question, Questionaries
 
 class GrandCafeAnalysis: 
-    def __init__(self):
-        pass
+    def execute_analysis(self, questionary):
+        conninfo = "postgresql:///grandcafedatabase"
+        db = DatabaseUtils(conninfo, 5, 10)
+        for question in questionary:
+            answer = db.get_query(question.get_query())
+            question.update_answer(answer)
+    
+
+if __name__ == "__main__":
+    gc_analysis = GrandCafeAnalysis()
+    questionary = []
+    question_1 = Question(
+        question= "How many entries do you have in your database who have applied for Spring 2025?",
+        query = "SELECT COUNT(*) FROM Applicants WHERE term = 'Spring 2025';",
+        query_description= "Using a Select statement with a count(*) function will return the number of rows in Applicants matches the criterion. " \
+        "In this case the term we are looking is 'Spring 2025'"
+    )
+    question_2 =Question(
+        question= "What percentage of entries are from international students (not American or Other) (to two decimal places)? ",
+        query = "SELECT (ROUND ((COUNT(*)*100.0)/ (SELECT COUNT(*) FROM Applicants),2)) AS Percentage FROM Applicants WHERE US_OR_INTERNATIONAL <> 'American';",
+        query_description= "This query calculates the percentage of applicants who are not American. It uses a nested SELECT statement to compute the total number " \
+        "of applicants in the database, and compares it to the count of non-American applicants. The outer SELECT performs the calculation: (Count of non-American applicants * 100.0) / (Total applicants) and then rounds it to 2 decimal places. We added a Percetage label to the result"
+    )
+    question_3 =Question(
+        question= "What is the average GPA, GRE, GRE V, GRE AW of applicants who provide these metrics?",
+        query = "SELECT ROUND(AVG(gpa)::NUMERIC, 2) as GPA_avg, ROUND(AVG(gre)::NUMERIC, 2) as GRE_avg, ROUND(AVG(gre_v)::NUMERIC,2) as GRE_V_avg, ROUND(AVG(gre_aw)::NUMERIC,2) as GRE_AW_avg FROM Applicants;",
+        query_description= "This query calculates the average of gpa, gre, gre_v, and gre_aw. It uses a SELECT statement with AVG function to compute the results." \
+        " To keep tow decimals in the response, it used round function to only display 2 decimals. For that to work with average, I cast the result from AVG to NUMERIC."
+    )
+    question_4 =Question(
+        question= "What is their average GPA of American students in Spring 2025?",
+        query = "SELECT ROUND(AVG(gpa)::NUMERIC,2) as GPA_avg FROM Applicants WHERE term = 'Spring 2025' AND US_OR_INTERNATIONAL = 'American'; ",
+        query_description= "This query calculates the average of gpa of American Students in Spring 2025. It uses a SELECT statement with AVG function to compute the results. " \
+        "To keep two decimals in the response, it uses round function to only display 2 decimals. For that to work with the average function, I cast the result from AVG to NUMERIC."
+    )
+    question_5 =Question(
+        question= "What percent of entries for Spring 2025 are Acceptances (to two decimal places)?",
+        query = "SELECT (ROUND ((COUNT(*)*100.0)/ (SELECT COUNT(*) FROM Applicants WHERE term = 'Spring 2025'),2)) AS Percentage FROM Applicants WHERE status ~* 'Accepted' AND term = 'Spring 2025';",
+        query_description= "This query calculates the percentage of applicants who were accepted for Spring 2025. It uses a nested SELECT statement to count the total number of applicants for Spring 2025,"
+        " and compares it to the count of applicants whose status matches 'Accepted' (case-insensitive) for the same term. It uses ROUND to display only two decimal places. "
+    )
+    question_6 =Question(
+        question= "What is the average GPA of applicants who applied for Spring 2025 who are Acceptances?",
+        query = "SELECT ROUND(AVG(gpa)::NUMERIC,2) AS Average FROM Applicants WHERE status ~* 'Accepted' AND term = 'Spring 2025';",
+        query_description= "This query calculates the average GPA of applicants who were accepted for the term Spring 2025. It uses the AVG() aggregation function to compute the mean GPA from applicants whose status" \
+        "The status matches 'Accepted' using a case-insensitive regular expression (~*), and term is 'Spring 2025'. It uses ROUND to display only two decimal places. "
+    )
+    question_7 =Question(
+        question= "How many entries are from applicants who applied to JHU for a masters degrees in Computer Science?",
+        query = "SELECT COUNT(*) FROM Applicants WHERE program ~* 'JHU' OR program ~* 'Johns Hopkins' AND degree ='Masters' AND program ~* 'Computer Science';",
+        query_description= "This query counts the number of applicants who applied to a Master's program in Computer Science at Johns Hopkins University. " \
+        "The program field must match either 'JHU' or 'Johns Hopkins' using case-insensitive regular expressions (~*). The degree must be 'Masters'." \
+        " The program must also include 'Computer Science' (again using case-insensitive regex)."
+    )
+
+    questionary.append(question_1)
+    questionary.append(question_2)
+    questionary.append(question_3)
+    questionary.append(question_4)
+    questionary.append(question_5)
+    questionary.append(question_6)
+    questionary.append(question_7)
+    gc_analysis.execute_analysis(questionary)
+    Questionaries(questionary).to_doc("query_data.txt")
+
+
+
+
 
