@@ -14,31 +14,31 @@ class GrandCafeAnalysis:
         )
         question_2 =Question(
             question= "What percentage of entries are from international students (not American or Other) (to two decimal places)? ",
-            query = "SELECT (ROUND ((COUNT(*)*100.0)/ (SELECT COUNT(*) FROM Applicants),2)) AS Percentage FROM Applicants WHERE US_OR_INTERNATIONAL <> 'American';",
+            query = "SELECT CAST((ROUND ((COUNT(*)*100.0)/ (SELECT COUNT(*) FROM Applicants),2)) AS FLOAT) AS Percentage FROM Applicants WHERE US_OR_INTERNATIONAL <> 'American';",
             query_description= "This query calculates the percentage of applicants who are not American. It uses a nested SELECT statement to compute the total number " \
             "of applicants in the database, and compares it to the count of non-American applicants. The outer SELECT performs the calculation: (Count of non-American applicants * 100.0) / (Total applicants) and then rounds it to 2 decimal places. We added a Percetage label to the result"
         )
         question_3 =Question(
             question= "What is the average GPA, GRE, GRE V, GRE AW of applicants who provide these metrics?",
-            query = "SELECT ROUND(AVG(gpa)::NUMERIC, 2) as GPA_avg, ROUND(AVG(gre)::NUMERIC, 2) as GRE_avg, ROUND(AVG(gre_v)::NUMERIC,2) as GRE_V_avg, ROUND(AVG(gre_aw)::NUMERIC,2) as GRE_AW_avg FROM Applicants;",
+            query = "SELECT CAST(ROUND(AVG(gpa)::NUMERIC, 2) AS FLOAT) as GPA_avg, CAST(ROUND(AVG(gre)::NUMERIC, 2) AS FLOAT) as GRE_avg, CAST(ROUND(AVG(gre_v)::NUMERIC,2) AS FLOAT) as GRE_V_avg, CAST(ROUND(AVG(gre_aw)::NUMERIC,2) AS FLOAT) as GRE_AW_avg FROM Applicants;",
             query_description= "This query calculates the average of gpa, gre, gre_v, and gre_aw. It uses a SELECT statement with AVG function to compute the results." \
             " To keep tow decimals in the response, it used round function to only display 2 decimals. For that to work with average, I cast the result from AVG to NUMERIC."
         )
         question_4 =Question(
             question= "What is their average GPA of American students in Spring 2025?",
-            query = "SELECT ROUND(AVG(gpa)::NUMERIC,2) as GPA_avg FROM Applicants WHERE term = 'Spring 2025' AND US_OR_INTERNATIONAL = 'American'; ",
+            query = "SELECT CAST(ROUND(AVG(gpa)::NUMERIC,2) AS FLOAT) as GPA_avg FROM Applicants WHERE term = 'Spring 2025' AND US_OR_INTERNATIONAL = 'American'; ",
             query_description= "This query calculates the average of gpa of American Students in Spring 2025. It uses a SELECT statement with AVG function to compute the results. " \
             "To keep two decimals in the response, it uses round function to only display 2 decimals. For that to work with the average function, I cast the result from AVG to NUMERIC."
         )
         question_5 =Question(
             question= "What percent of entries for Spring 2025 are Acceptances (to two decimal places)?",
-            query = "SELECT (ROUND ((COUNT(*)*100.0)/ (SELECT COUNT(*) FROM Applicants WHERE term = 'Spring 2025'),2)) AS Percentage FROM Applicants WHERE status ~* 'Accepted' AND term = 'Spring 2025';",
+            query = "SELECT CAST((ROUND ((COUNT(*)*100.0)/ (SELECT COUNT(*) FROM Applicants WHERE term = 'Spring 2025'),2)) AS FLOAT) AS Percentage FROM Applicants WHERE status ~* 'Accepted' AND term = 'Spring 2025';",
             query_description= "This query calculates the percentage of applicants who were accepted for Spring 2025. It uses a nested SELECT statement to count the total number of applicants for Spring 2025,"
             " and compares it to the count of applicants whose status matches 'Accepted' (case-insensitive) for the same term. It uses ROUND to display only two decimal places. "
         )
         question_6 =Question(
             question= "What is the average GPA of applicants who applied for Spring 2025 who are Acceptances?",
-            query = "SELECT ROUND(AVG(gpa)::NUMERIC,2) AS Average FROM Applicants WHERE status ~* 'Accepted' AND term = 'Spring 2025';",
+            query = "SELECT CAST(ROUND(AVG(gpa)::NUMERIC,2) AS FLOAT) AS Average FROM Applicants WHERE status ~* 'Accepted' AND term = 'Spring 2025';",
             query_description= "This query calculates the average GPA of applicants who were accepted for the term Spring 2025. It uses the AVG() aggregation function to compute the mean GPA from applicants whose status" \
             "The status matches 'Accepted' using a case-insensitive regular expression (~*), and term is 'Spring 2025'. It uses ROUND to display only two decimal places. "
         )

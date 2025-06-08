@@ -55,8 +55,10 @@ class DatabaseUtils:
         try: 
             with self.get_db_connection() as conn:
                 with conn.cursor() as cur:
-                        cur.execute(query, params)
-                        return cur.fetchall()
+                    cur.execute(query, params)
+                    rows = cur.fetchall()
+                    values_list = [list(row) for row in rows]
+                    return values_list
         except Exception as e:
             print(f"Error executing query: {e}")
 
@@ -65,8 +67,10 @@ class DatabaseUtils:
         try: 
             with self.get_db_connection() as conn:
                 with conn.cursor() as cur:
-                        cur.execute(query)
-                        return cur.fetchall()
+                    cur.execute(query)
+                    rows = cur.fetchall()
+                    values_list = [list(row) for row in rows]
+                    return values_list
         except Exception as e:
             print(f"Error executing query: {e}")
 
