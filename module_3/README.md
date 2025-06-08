@@ -77,7 +77,7 @@ This will:
    - Drop and recreate the Applicants table
 
    - Load and clean JSON data
-   
+
    - Insert applicants into the database
 
 ### Run analysis as Flask App
@@ -91,7 +91,7 @@ python app.py
 
 Option 2: 
 ```bash
-flask --app run.py run
+flask --app app.py run
 ```
 Open your browser and go to:
 http://127.0.0.1:5000
