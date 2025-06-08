@@ -1,6 +1,16 @@
+"""
+Question.py  - Question defined module
+-------------------------------------------------
+This module defines the `Question` and `Questionaries` classes, which represents a structured format
+for questions with the question itself, SQL query, query description, and answer.
+
+Features:
+ - The Question class is designed to store key information about each question
+ - Questionaries offers a to_doc() function that has as an output a txt file with all the questions and answers edited. 
+"""
 import os
 class Question:
-    # Initializes Applicant.
+    # Initializes Question.
     def __init__(self, question,query, query_description, answer):
         self.question= question
         self.query = query
@@ -18,6 +28,7 @@ class Question:
         return response
 
 class Questionaries: 
+    # Initializes Questionary.
     def __init__(self, question_list):
         self.questions = question_list
     
