@@ -70,7 +70,7 @@ class DatabaseUtils:
                     cur.execute(query)
                     rows = cur.fetchall()
                     values_list = [list(row) for row in rows]
-                    return values_list
+                    return values_list[0]
         except Exception as e:
             print(f"Error executing query: {e}")
 

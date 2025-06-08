@@ -1,14 +1,14 @@
 import os
 class Question:
     # Initializes Applicant.
-    def __init__(self, question,query, query_description):
+    def __init__(self, question,query, query_description, answer):
         self.question= question
         self.query = query
         self.query_description = query_description
-        self.answer = ""
-
-    def update_answer(self, answer):
         self.answer = answer
+
+    def update_answer(self, values):
+        self.answer = self.answer.format(*values)
     
     def get_query(self):
         return self.query
