@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Grand Cafe Analysis</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    </head>
+    <body>
+        <nav>
+            <a> Grand School Cafe Data Analysis</a>
+        </nav>
+        <hr>
+        <div class="content">
+            {% block content %} {% endblock %}
+        </div>
+    </body>
+</html>
