@@ -1,4 +1,4 @@
-from pizza import Pizza
+from module_4.tests.pizza_ordering_app.pizza import Pizza
 
 class Order:
     def __init__(self):
@@ -7,10 +7,10 @@ class Order:
         #initialize order cost
         self.total_cost = 0
         #initialize status of the order
-        self.status = "Submitted"
+        self.paid = False
     
     def __str__(self):
-        pizza_descriptions = "\n".join(str(pizza) for pizza in self.pizzas)
+        pizza_descriptions = "\n".join(pizza.__str__() for pizza in self.pizzas)
         return f"Customer Requested:\n{pizza_descriptions}"
     
     #input the customers order for a given pizza
@@ -23,5 +23,5 @@ class Order:
     
     def order_paid(self):
         #Set order as paid once payment has been collected
-        self.status = "Paid"
+        self.status = True
         
