@@ -29,8 +29,11 @@ def test_order_init_function(example_init_order, attr, expected_result):
 
 @pytest.mark.unit
 @pytest.mark.parametrize("fixture_funct, expected_result", [
-    ("example_simple_order","Customer Requested:\nCrust: Thin, Sauce: ['Pesto', 'Liv_Sauce'], Cheese: Mozzarella, Toppings: ['Mushrooms', 'Pepperoni'], Cost: 18"),
-    ("example_complex_order","Customer Requested:\nCrust: Thin, Sauce: ['Pesto', 'Liv_Sauce'], Cheese: Mozzarella, Toppings: ['Mushrooms', 'Pepperoni'], Cost: 18 \nCrust: Thick, Sauce: ['Pesto', 'Liv_Sauce', 'Marinara'], Cheese: Mozzarella, Toppings: ['Mushrooms', 'Pepperoni', 'Pineapple'], Cost: 22"),
+    ("example_simple_order","Customer Requested:\n"
+        "Crust: Thin, Sauce: ['Pesto', 'Liv_Sauce'], Cheese: Mozzarella, Toppings: ['Mushrooms', 'Pepperoni'], Cost: 18"),
+    ("example_complex_order","Customer Requested:\n"
+        "Crust: Thin, Sauce: ['Pesto', 'Liv_Sauce'], Cheese: Mozzarella, Toppings: ['Mushrooms', 'Pepperoni'], Cost: 18\n"
+        "Crust: Thick, Sauce: ['Pesto', 'Liv_Sauce', 'Marinara'], Cheese: Mozzarella, Toppings: ['Mushrooms', 'Pepperoni', 'Pineapple'], Cost: 22"),
 ])
 def test_order_str_function(request, fixture_funct,expected_result):
     # Test order should return a string containing customer full order and cost

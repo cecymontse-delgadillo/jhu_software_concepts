@@ -1,3 +1,7 @@
-from .order import Order
+# src/__init__.py
 
-__all__ = ["Order"]
+from .order import Order
+from .pizza import Pizza
+
+__all__ = ["Order", "Pizza"]
+
