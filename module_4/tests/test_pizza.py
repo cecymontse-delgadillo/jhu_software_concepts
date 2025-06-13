@@ -6,6 +6,7 @@ def example_init_pizza():
     return Pizza("Thin", ["Pesto", "Liv_Sauce"], "Mozzarella", ["Mushrooms", "Pepperoni"])
 
 @pytest.mark.unit
+@pytest.mark.pizza
 def test_pizza_init_function(example_init_pizza):
     #Test return an initialized pizza
     assert isinstance(example_init_pizza, Pizza)
@@ -20,11 +21,13 @@ def test_pizza_init_function(example_init_pizza):
     assert example_init_pizza.cost != 0
 
 @pytest.mark.unit
+@pytest.mark.pizza
 def test_pizza_str_function(example_init_pizza):
     #Test pizza should return a string containing the pizza and cost
     assert example_init_pizza.__str__() == "Crust: Thin, Sauce: ['Pesto', 'Liv_Sauce'], Cheese: Mozzarella, Toppings: ['Mushrooms', 'Pepperoni'], Cost: 18"
 
 @pytest.mark.unit
+@pytest.mark.pizza
 def test_pizza_cost(example_init_pizza):
     #Test return of correct cost for an input pizza
     assert example_init_pizza.cost == 18
