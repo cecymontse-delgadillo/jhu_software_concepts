@@ -5,6 +5,100 @@ A simple Python system to build pizzas with your choice of crust, sauces, cheese
 ## Project Structure
 ```bash
 .
+├── build
+│   ├── doctrees
+│   │   ├── environment.pickle
+│   │   └── index.doctree
+│   └── html
+│       ├── _sources
+│       │   └── index.rst.txt
+│       ├── _static
+│       │   ├── _sphinx_javascript_frameworks_compat.js
+│       │   ├── alabaster.css
+│       │   ├── basic.css
+│       │   ├── css
+│       │   │   ├── badge_only.css
+│       │   │   ├── fonts
+│       │   │   │   ├── fontawesome-webfont.eot
+│       │   │   │   ├── fontawesome-webfont.svg
+│       │   │   │   ├── fontawesome-webfont.ttf
+│       │   │   │   ├── fontawesome-webfont.woff
+│       │   │   │   ├── fontawesome-webfont.woff2
+│       │   │   │   ├── lato-bold-italic.woff
+│       │   │   │   ├── lato-bold-italic.woff2
+│       │   │   │   ├── lato-bold.woff
+│       │   │   │   ├── lato-bold.woff2
+│       │   │   │   ├── lato-normal-italic.woff
+│       │   │   │   ├── lato-normal-italic.woff2
+│       │   │   │   ├── lato-normal.woff
+│       │   │   │   ├── lato-normal.woff2
+│       │   │   │   ├── Roboto-Slab-Bold.woff
+│       │   │   │   ├── Roboto-Slab-Bold.woff2
+│       │   │   │   ├── Roboto-Slab-Regular.woff
+│       │   │   │   └── Roboto-Slab-Regular.woff2
+│       │   │   └── theme.css
+│       │   ├── custom.css
+│       │   ├── doctools.js
+│       │   ├── documentation_options.js
+│       │   ├── file.png
+│       │   ├── fonts
+│       │   │   ├── Lato
+│       │   │   │   ├── lato-bold.eot
+│       │   │   │   ├── lato-bold.ttf
+│       │   │   │   ├── lato-bold.woff
+│       │   │   │   ├── lato-bold.woff2
+│       │   │   │   ├── lato-bolditalic.eot
+│       │   │   │   ├── lato-bolditalic.ttf
+│       │   │   │   ├── lato-bolditalic.woff
+│       │   │   │   ├── lato-bolditalic.woff2
+│       │   │   │   ├── lato-italic.eot
+│       │   │   │   ├── lato-italic.ttf
+│       │   │   │   ├── lato-italic.woff
+│       │   │   │   ├── lato-italic.woff2
+│       │   │   │   ├── lato-regular.eot
+│       │   │   │   ├── lato-regular.ttf
+│       │   │   │   ├── lato-regular.woff
+│       │   │   │   └── lato-regular.woff2
+│       │   │   └── RobotoSlab
+│       │   │       ├── roboto-slab-v7-bold.eot
+│       │   │       ├── roboto-slab-v7-bold.ttf
+│       │   │       ├── roboto-slab-v7-bold.woff
+│       │   │       ├── roboto-slab-v7-bold.woff2
+│       │   │       ├── roboto-slab-v7-regular.eot
+│       │   │       ├── roboto-slab-v7-regular.ttf
+│       │   │       ├── roboto-slab-v7-regular.woff
+│       │   │       └── roboto-slab-v7-regular.woff2
+│       │   ├── github-banner.svg
+│       │   ├── jquery.js
+│       │   ├── js
+│       │   │   ├── badge_only.js
+│       │   │   ├── theme.js
+│       │   │   └── versions.js
+│       │   ├── language_data.js
+│       │   ├── minus.png
+│       │   ├── plus.png
+│       │   ├── pygments.css
+│       │   ├── searchtools.js
+│       │   └── sphinx_highlight.js
+│       ├── genindex.html
+│       ├── index.html
+│       ├── objects.inv
+│       ├── py-modindex.html
+│       ├── search.html
+│       └── searchindex.js
+├── main.py
+├── make.bat
+├── Makefile
+├── pizza_app_sphinx.html      # Sphinx generated HTML associated with your application under module_4
+├── pytest.ini                 # A pytest.ini to register your custom markers
+├── requirements.txt           # Python dependencies
+└── README.md                  # Project documentation
+├── source
+│   ├── _static
+│   ├── _templates
+│   ├── conf.py
+│   └── index.rst
+├── Sphinx HTML screenshots.pdf
 ├── src/
 │   ├── __init__.py     # Initializes the module, and imports Order and Pizza
 │   ├── pizza.py        # Defines the Pizza class: ingredients & pricing
@@ -14,9 +108,11 @@ A simple Python system to build pizzas with your choice of crust, sauces, cheese
 │   ├── test_pizza.py   # Unit tests for Pizza
 │   ├── test_order.py   # Unit tests for Order
 │   ├── test_order_integration.py  # Integration tests for Order + multiple pizzas
-├── pytest.ini           # A pytest.ini to register your custom markers
-├── requirements.txt           # Python dependencies
-└── README.md                  # Project documentation
+
+17 directories, 88 files
+
+
+
 ```
 
 ## Features
