@@ -1,6 +1,6 @@
 # Pytest and Sphinx: Python Pizza Ordering System
 
-A simple Python system to build pizzas with your choice of crust, sauces, cheese, and toppings — add them to an order, calculate costs, and test it all with pytest.
+A simple Python system to build pizzas with your choice of crust, sauces, cheese, and toppings — add them to an order, calculate costs, and test it all with pytest. Documentation generated with Sphinx. 
 
 ## Project Structure
 .
