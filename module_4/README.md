@@ -3,6 +3,7 @@
 A simple Python system to build pizzas with your choice of crust, sauces, cheese, and toppings — add them to an order, calculate costs, and test it all with pytest. Documentation generated with Sphinx. 
 
 ## Project Structure
+```bash
 .
 ├── src/
 │   ├── __init__.py     # Initializes the module, and imports Order and Pizza
@@ -16,7 +17,7 @@ A simple Python system to build pizzas with your choice of crust, sauces, cheese
 ├── pytest.ini           # A pytest.ini to register your custom markers
 ├── requirements.txt           # Python dependencies
 └── README.md                  # Project documentation
-
+```
 
 ## Features
 - Customizable Pizza class
