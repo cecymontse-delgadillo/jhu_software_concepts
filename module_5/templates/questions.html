@@ -1,0 +1,20 @@
+<!--
+  questions.html - Questions content
+  ------------------------------------
+  This HTML file a section extending base.html where questions will be displayed
+  It includes:
+  - A div section for each question. 
+  - Question and answer containers. 
+-->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1> {% block title %} Analysis {% endblock %}</h1>
+    {% for question in questions %}
+        <div class="block">
+            <b><p clas="question">{{ question. question}}</p></b>
+            <i><p class="answer"> Answer: {{ question.answer}}</p></i>
+        </div>
+    {% endfor%}
+    
+{% endblock %}

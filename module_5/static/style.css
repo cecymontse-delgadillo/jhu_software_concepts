@@ -1,0 +1,17 @@
+nav a {
+    color: #607d8b;
+    font-size: 1.5em;
+    margin-left: 50px;
+    text-decoration: none;
+}
+
+.block {
+    padding: 20px;
+    margin: 10px;
+    background-color: #f7f4f4;
+}
+
+h1{
+    font-size: 3em;
+}
+
