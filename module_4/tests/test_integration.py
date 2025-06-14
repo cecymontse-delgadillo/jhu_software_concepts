@@ -1,7 +1,20 @@
+"""
+test_integration.py - Testing Integration Module
+-------------------------------------------------
+Integration tests for Order + multiple pizzas
+
+Features: 
+- Complex orders with multiple pizzas and cost correctness
+
+Uses:
+    - pytest fixtures
+    - pytest markers for unit and order scope
+
+"""
 from src import Order
 import pytest
 
-
+# Fixture: Order_1 - Create an Order with two pizzas for testing.
 @pytest.fixture
 def example_complex_order():
     order_1 = Order()
@@ -9,6 +22,7 @@ def example_complex_order():
     order_1.input_pizza("thick", ["marinara"], "mozzarella", ["mushrooms"])
     return order_1
 
+# Fixture: Order_2 - Create an Order with two pizzas for testing.
 @pytest.fixture
 def example_complex_order_two():
     order_2 = Order()
@@ -16,6 +30,7 @@ def example_complex_order_two():
     order_2.input_pizza("thin", ["liv_sauce", "pesto"], "mozzarella", ["mushrooms","pepperoni"])
     return order_2
 
+# Test: __str__ returns a string listing all pizzas in the order.
 @pytest.mark.integration
 @pytest.mark.order
 @pytest.mark.parametrize("fixture_funct, expected_result", [
