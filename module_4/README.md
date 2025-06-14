@@ -153,6 +153,10 @@ print(f"Paid: {order.paid}")
 
 ```
 
+## RTD Link
+
+https://pizza-app.readthedocs.io/en/latest/
+
 ## Running Tests
 
 ### 1. Run all tests Order and Pizza (unit + integration):
